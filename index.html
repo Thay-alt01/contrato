@@ -7,9 +7,7 @@
 <title>Contrato de Renovação de Relacionamento não muito Sério</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
-
-<!-- EMAILJS -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
 
 <style>
 /* --- BASE --- */
@@ -43,6 +41,7 @@ h1 {
     0 0 40px #ff073a;
 }
 
+/* --- CARD CONTRATO --- */
 .contrato {
   background: rgba(255, 255, 255, 0.15);
   border-radius: 15px;
@@ -56,6 +55,7 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/* --- POPUP --- */
 .mensagem-final {
   position: fixed;
   top: 50%;
@@ -79,6 +79,7 @@ h1 {
   transform: translate(-50%, -50%) scale(1);
 }
 
+/* --- TEXTO --- */
 .clausula {
   font-family: 'Indie Flower', cursive;
   margin: 10px 0;
@@ -92,6 +93,7 @@ h1 {
   line-height: 1.2;
 }
 
+/* --- FORM --- */
 input, button {
   width: 100%;
   padding: 12px;
@@ -119,6 +121,7 @@ button:hover {
   color: #ffd6d6;
 }
 
+/* --- ANIMAÇÕES --- */
 .heart, .confetti { position: fixed; animation-fill-mode: forwards; }
 .heart { font-size: 24px; color: #ff4d6d; animation: floatUp 4s linear; }
 .confetti { width: 10px; height: 10px; animation: fallDown 3s linear; }
@@ -126,6 +129,7 @@ button:hover {
 @keyframes floatUp { to { transform: translateY(-300px); opacity: 0; } }
 @keyframes fallDown { to { transform: translateY(300px); opacity: 0; } }
 
+/* --- OVERLAY FINAL --- */
 #overlayFinal {
   position: fixed;
   inset: 0;
@@ -150,6 +154,7 @@ button:hover {
   transition: 1s;
 }
 
+/* --- EFEITOS --- */
 .piscar { animation: piscarSuave 4s infinite; }
 @keyframes piscarSuave { 50% { opacity: 0.8; } }
 
@@ -162,6 +167,7 @@ button:hover {
   100% { transform: translateX(0); }
 }
 
+/* --- MOBILE --- */
 @media (max-width: 480px) {
   h1 { font-size: 1.8rem; }
   #mensagemSecreta { font-size: 1.8rem; padding: 20px; }
@@ -183,7 +189,11 @@ button:hover {
   <p class="clausula">2. Fotos do little Davs.</p>
   <p class="clausula">3. Proibido comprar minha segunda pele (Camisa Dark Lab).</p>
   <p class="clausula">4. Proibido ir a um show do Tuê sem a Parte A desse contrato (Eu).</p>
+  <p class="letra-pequena">*Não é permitido também chegar em outras pessoas perguntando se elas foram KKKKKK</p>
   <p class="clausula">5. O contrato pode ser revisado a qualquer momento.</p>
+  <p class="letra-pequena">
+    *Apenas quem elaborou o contrato pode fazer alterações. Parte B aceita revisões com sorriso no rosto e, se necessário, com um brownie.
+  </p>
 
   <h3>Assinatura Digital</h3>
   <input type="text" id="nome" placeholder="Digite seu nome para assinar">
@@ -198,29 +208,115 @@ button:hover {
 <audio id="audioPlayer" src="maria-matue.mp3"></audio>
 
 <script>
-(function(){
+  (function(){
   emailjs.init("9f5vr5u27AE_om6uo");
 })();
 
+function fadeInAudio(audio, duration = 3000) {
+  audio.volume = 0;
+  audio.play();
+  const step = 0.05;
+  const interval = duration / (1 / step);
+  const fade = setInterval(() => {
+    if (audio.volume < 0.8) audio.volume += step;
+    else clearInterval(fade);
+  }, interval);
+}
+
 function assinar() {
   const nome = document.getElementById("nome").value;
+
   if (!nome.trim()) return alert("Digite seu nome!");
 
-  const dataAtual = new Date().toLocaleString("pt-BR");
+  if (nome.toLowerCase().includes("amor")) {
+    document.body.style.background = "linear-gradient(to bottom, #2b0000, #550000)";
+  }
 
   document.getElementById("assinatura").innerText =
-    `Assinado digitalmente por ${nome} em ${dataAtual}`;
-
+    Assinado digitalmente por ${nome} em ${new Date().toLocaleString("pt-BR")};
   // ENVIA EMAIL
-  emailjs.send("service_bstx3fv", "template_i6jsbge", {
-    name: nome,
-    data: dataAtual,
-    protocolo: Math.floor(Math.random() * 100000)
-  })
-  .then(() => console.log("Prova arquivada com sucesso 😌📜"))
-  .catch(error => console.log("Erro:", error));
+emailjs.send("service_bstx3fv", "template_i6jsbge", {
+  name: nome,
+  data: new Date().toLocaleString("pt-BR"),
+  protocolo: Math.floor(Math.random() * 100000)
+})
+.then(function(response) {
+  console.log("Prova arquivada com sucesso 😌📜");
+}, function(error) {
+  console.log("Erro ao enviar email:", error);
+});
 
-  alert("Prova arquivada com sucesso 😌📜");
+
+  for (let i = 0; i < 15; i++) { criarCoracao(); criarConfete(); }
+
+  const msgFinal = document.getElementById("mensagemFinal");
+  msgFinal.style.display = "block";
+  setTimeout(() => msgFinal.classList.add("entrada"), 50);
+
+  setTimeout(() => {
+    msgFinal.style.opacity = "0";
+    setTimeout(iniciarFinalCinematico, 1200);
+  }, 2500);
+}
+
+function iniciarFinalCinematico() {
+  const overlay = document.getElementById("overlayFinal");
+  const mensagem = document.getElementById("mensagemSecreta");
+  const audio = document.getElementById("audioPlayer");
+
+  audio.currentTime = 0;
+  audio.volume = 1;
+
+  audio.play().catch(error => {
+    console.log("Erro ao tentar tocar áudio:", error);
+  });
+
+  overlay.style.opacity = "1";
+  overlay.style.pointerEvents = "all";
+
+
+
+  const texto = "Já parou de sorrir aí, novinha? KKKKKK";
+  let i = 0;
+
+  setTimeout(() => {
+    mensagem.style.opacity = "1";
+    mensagem.style.transform = "scale(1)";
+
+    const intervalo = setInterval(() => {
+      mensagem.innerHTML += texto.charAt(i);
+      i++;
+      if (i >= texto.length) {
+        clearInterval(intervalo);
+        mensagem.classList.add("piscar", "tremer");
+      }
+    }, 150);
+  }, 2000);
+}
+
+function criarCoracao() {
+  const el = document.createElement("div");
+  el.className = "heart";
+  el.innerHTML = "❤️";
+  el.style.left = Math.random() * window.innerWidth + "px";
+  el.style.top = window.innerHeight - 50 + "px";
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 4000);
+}
+
+function criarConfete() {
+  const el = document.createElement("div");
+  el.className = "confetti";
+  el.style.left = Math.random() * window.innerWidth + "px";
+  el.style.top = "0px";
+  el.style.background = getRandomColor();
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 3000);
+}
+
+function getRandomColor() {
+  const colors = ["#ff4d6d", "#ffd700", "#00ff7f", "#1e90ff", "#ff69b4"];
+  return colors[Math.floor(Math.random() * colors.length)];
 }
 </script>
 
