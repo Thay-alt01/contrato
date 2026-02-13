@@ -248,10 +248,15 @@ function iniciarFinalCinematico() {
   const audio = document.getElementById("audioPlayer");
 
   audio.currentTime = 0;
-  audio.play();
+  audio.volume = 1;
+
+  audio.play().catch(error => {
+    console.log("Erro ao tentar tocar áudio:", error);
+  });
 
   overlay.style.opacity = "1";
   overlay.style.pointerEvents = "all";
+
 
 
   const texto = "Já parou de sorrir aí, novinha? KKKKKK";
@@ -300,4 +305,5 @@ function getRandomColor() {
 
 </body>
 </html>
+
 
