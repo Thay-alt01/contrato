@@ -319,10 +319,29 @@ function getRandomColor() {
   const colors = ["#ff4d6d", "#ffd700", "#00ff7f", "#1e90ff", "#ff69b4"];
   return colors[Math.floor(Math.random() * colors.length)];
 }
+
+/* 🔥 CORREÇÃO INSTAGRAM - PAUSAR ÁUDIO AO SAIR */
+
+document.addEventListener("visibilitychange", function () {
+  const audio = document.getElementById("audioPlayer");
+  if (document.hidden && audio) {
+    audio.pause();
+  }
+});
+
+window.addEventListener("pagehide", function () {
+  const audio = document.getElementById("audioPlayer");
+  if (audio) {
+    audio.pause();
+  }
+});
+
 </script>
+
 
 </body>
 </html>
+
 
 
 
