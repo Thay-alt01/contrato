@@ -247,11 +247,12 @@ function iniciarFinalCinematico() {
   const mensagem = document.getElementById("mensagemSecreta");
   const audio = document.getElementById("audioPlayer");
 
-  audio.currentTime = 7;
-  fadeInAudio(audio, 3000);
+  audio.currentTime = 0;
+  audio.play();
 
   overlay.style.opacity = "1";
   overlay.style.pointerEvents = "all";
+
 
   const texto = "Já parou de sorrir aí, novinha? KKKKKK";
   let i = 0;
@@ -299,3 +300,4 @@ function getRandomColor() {
 
 </body>
 </html>
+
