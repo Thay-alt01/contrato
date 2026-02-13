@@ -7,7 +7,8 @@
 <title>Contrato de Renovação de Relacionamento não muito Sério</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
 
 <style>
 /* --- BASE --- */
@@ -192,7 +193,7 @@ button:hover {
   <p class="letra-pequena">*Não é permitido também chegar em outras pessoas perguntando se elas foram KKKKKK</p>
   <p class="clausula">5. O contrato pode ser revisado a qualquer momento.</p>
   <p class="letra-pequena">
-    *Apenas quem elaborou o contrato pode fazer alterações. Parte B deve aceitar revisões com sorriso no rosto e, se necessário, com um brownie.
+    *Apenas quem elaborou o contrato (Parte A) pode fazer alterações. Parte B deve aceitar revisões com sorriso no rosto e, se necessário, com um brownie.
   </p>
 
   <h3>Assinatura Digital</h3>
@@ -208,9 +209,8 @@ button:hover {
 <audio id="audioPlayer" src="maria-matue.mp3"></audio>
 
 <script>
-  (function(){
   emailjs.init("9f5vr5u27AE_om6uo");
-})();
+
 
 function fadeInAudio(audio, duration = 3000) {
   audio.volume = 0;
@@ -323,5 +323,6 @@ function getRandomColor() {
 
 </body>
 </html>
+
 
 
