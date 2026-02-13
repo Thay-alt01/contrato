@@ -233,7 +233,8 @@ function assinar() {
   }
 
   document.getElementById("assinatura").innerText =
-    Assinado digitalmente por ${nome} em ${new Date().toLocaleString("pt-BR")};
+  `Assinado digitalmente por ${nome} em ${new Date().toLocaleString("pt-BR")}`;
+
   // ENVIA EMAIL
 emailjs.send("service_bstx3fv", "template_i6jsbge", {
   name: nome,
@@ -322,4 +323,5 @@ function getRandomColor() {
 
 </body>
 </html>
+
 
